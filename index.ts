@@ -11,7 +11,7 @@ if (typeof Bun === "undefined") {
 
 program
     .argument('[file]', 'file to submit', 'main.cpp')
-    .requiredOption('-p, --pid <number>', 'problem id')
+    .requiredOption('-p, --pid <number>', 'problem id to submit to')
     .option('-c --config', 'path to config file', os.homedir() + '/quicksubmit.json')
     .option('-O, --O2 <bool>', 'whether to enable O2', true)
     .description('Submit code to XMOJ.')
