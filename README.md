@@ -25,7 +25,7 @@ To compile:
 ```
 # usage
 ```
-Usage: index [options] [file]
+Usage: quicksubmit [options] [file]
 
 Submit code to XMOJ.
 
@@ -33,7 +33,7 @@ Arguments:
   file                file to submit (default: "main.cpp")
 
 Options:
-  -p, --pid <number>  problem id
+  -p, --pid <number>  problem id to submit to
   -c --config         path to config file
   -O, --O2 <bool>     whether to enable O2 (default: true)
   -h, --help          display help for command
