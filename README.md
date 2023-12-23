@@ -1,4 +1,6 @@
-# quicksubmit
+# quickSubmit
+<img width="682" alt="image" src="https://github.com/boomzero/quicksubmit/assets/85378277/98b76c00-1ce7-4c37-a05d-6acbcbc1d1c7">
+
 
 First install bun:
 ```bash
