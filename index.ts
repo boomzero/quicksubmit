@@ -99,7 +99,7 @@ program
                 for (let i = 0; i < rows.length; i++) {
                     contestProblems.push(rows[i].children[1].textContent.substring(2,6).replaceAll("\t",""));
                 }
-                console.log(contestProblems);
+                //console.log(contestProblems);
                 if (contestProblems.indexOf(options.pid) == -1) {
                     console.error(`Problem ${options.pid} not found in contest ${options.cid}!`);
                     process.exit(1);
@@ -139,7 +139,7 @@ program
                 });
             }
             const res = await subReq.text();
-            console.log(res);
+            //console.log(res);
             if (subReq.status != 200) {
                 console.error(`Failed to submit ${file} to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``), `! Status code: ${subReq.status} ${subReq.statusText}`);
                 process.exit(1);
