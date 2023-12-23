@@ -85,7 +85,7 @@ program
                 "body": "id=" + options.pid + "&" +
                     "language=1&" +
                     "source=" + encodeURIComponent(await Bun.file(file).text()) + 
-                    (options.O2 ? "&enable_O2=on" : "")
+                    (options.O2 == false ? "&enable_O2=on" : "")
             });
             if (subReq.status != 200) {
                 console.error(`Failed to submit ${file} to problem ${options.pid}! Status code: ${subReq.status} ${subReq.statusText}}`);
