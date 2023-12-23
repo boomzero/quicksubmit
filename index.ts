@@ -1,5 +1,6 @@
 import { Command } from 'commander';
 import MD5 from 'crypto-js/md5';
+import os from 'os';
 const program = new Command();
 
 
@@ -11,7 +12,7 @@ if (typeof Bun === "undefined") {
 program
     .argument('[file]', 'file to submit', 'main.cpp')
     .requiredOption('-p, --pid <number>', 'problem id')
-    .option('-c --config', 'path to config file', 'quicksubmit.json')
+    .option('-c --config', 'path to config file', os.homedir() + '/quicksubmit.json')
     .option('-O, --O2 <bool>', 'whether to enable O2', true)
     .description('Submit code to XMOJ.')
     .action(async (file, options) => {
