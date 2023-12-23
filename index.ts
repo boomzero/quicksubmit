@@ -84,8 +84,8 @@ program
                 "method": "POST",
                 "body": "id=" + options.pid + "&" +
                     "language=1&" +
-                    "source=" + encodeURIComponent(await Bun.file(file).text()) + "&" +
-                    "enable_O2=" + (options.O2 ? "on" : "off")
+                    "source=" + encodeURIComponent(await Bun.file(file).text()) + 
+                    (options.O2 ? "&enable_O2=on" : "")
             });
             if (subReq.status != 200) {
                 console.error(`Failed to submit ${file} to problem ${options.pid}! Status code: ${subReq.status} ${subReq.statusText}}`);
