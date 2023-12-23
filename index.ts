@@ -87,8 +87,8 @@ program
                     "method": "GET",
                     "mode": "cors"
                 });
-                const res=await contestReq.text();
-                if (contestReq.status != 200||res.indexOf("比赛尚未开始或私有，不能查看题目。") != -1) {
+                const res = await contestReq.text();
+                if (contestReq.status != 200 || res.indexOf("比赛尚未开始或私有，不能查看题目。") != -1) {
                     console.error(`Failed to get contest page!`);
                     process.exit(1);
                 }
@@ -97,7 +97,7 @@ program
                 let contestProblems = [];
                 let rows = (dom.window.document.querySelector("#problemset > tbody") as HTMLTableSectionElement).rows;
                 for (let i = 0; i < rows.length; i++) {
-                    contestProblems.push(rows[i].children[1].textContent.substring(2,6).replaceAll("\t",""));
+                    contestProblems.push(rows[i].children[1].textContent.substring(2, 6).replaceAll("\t", ""));
                 }
                 //console.log(contestProblems);
                 if (contestProblems.indexOf(options.pid) == -1) {
@@ -148,7 +148,14 @@ program
                 console.error(`You don't have permission to submit to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``), `!`);
                 process.exit(1);
             }
+            let dom = new JSDOM(res);
+            if(dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`)==null){
+                console.error(`Failed to submit ${file} to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``), `!(Submission happened successfully, but the submission result is not available.)`);
+                process.exit(1);
+            }
+            let rid:string=dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`).innerHTML;
             console.log(`Submitted ${file} to problem ${options.pid}!`);
+            console.log(`Submission ID: ${rid}`);
             const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
                 "credentials": "include",
                 "headers": {
