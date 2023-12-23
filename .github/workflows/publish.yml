@@ -1,0 +1,42 @@
+name: Publish
+
+on:
+  push:
+    tags:
+      - '*'
+jobs:
+  build-linux:
+    name: Publish Linux Binaries
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: |
+        curl -fsSL https://bun.sh/install | bash
+        bun build index.ts --compile --outfile=quicksubmit
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: quicksubmit
+        asset_name: quicksubmit-linux-amd64
+        tag: ${{ github.ref }}
+        overwrite: true
+  build-macos:
+    name: Publish macOS binaries
+    runs-on: macos-12
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: |
+        curl -fsSL https://bun.sh/install | bash
+        bun build index.ts --compile --outfile=quicksubmit
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: quicksubmit
+        asset_name: quicksubmit-darwin-amd64
+        tag: ${{ github.ref }}
+        overwrite: true
