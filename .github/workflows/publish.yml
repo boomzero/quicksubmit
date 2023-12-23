@@ -11,11 +11,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+    - uses: oven-sh/setup-bun@v1
     - name: Build
       run: |
-        curl -fsSL https://bun.sh/install | bash
-        ~/.bun/bin/bun install
-        ~/.bun/bin/bun  build index.ts --compile --outfile=quicksubmit
+        bun install
+        bun build index.ts --compile --outfile=quicksubmit
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
@@ -29,11 +29,11 @@ jobs:
     runs-on: macos-12
     steps:
     - uses: actions/checkout@v2
+    - uses: oven-sh/setup-bun@v1
     - name: Build
       run: |
-        curl -fsSL https://bun.sh/install | bash
-        ~/.bun/bin/bun install
-        ~/.bun/bin/bun build index.ts --compile --outfile=quicksubmit
+        bun install
+        bun build index.ts --compile --outfile=quicksubmit
     - name: Upload binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
