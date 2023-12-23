@@ -16,7 +16,11 @@ To run:
 ```bash
 bun run index.ts
 ```
+To compile:
 
+```bash
+ bun build index.ts --compile --outfile=quicksubmit
+```
 # usage
 ```
 Usage: index [options] [file]
