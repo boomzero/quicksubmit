@@ -48,6 +48,7 @@ program
             csrf = csrf.replace("\" class=\"1\">\n", "");
             console.log(`got CSRF: ${csrf}`);
             let PHPSESSID: string = Math.random().toString(36).substring(2, 15);
+            console.log(`using PHPSESSID: ${PHPSESSID}`);
             const loginReq = await fetch("https://www.xmoj.tech/login.php", {
                 "credentials": "include",
                 "headers": {
@@ -86,16 +87,38 @@ program
                     "source=" + encodeURIComponent(await Bun.file(file).text()) + "&" +
                     "enable_O2=" + (options.O2 ? "on" : "off")
             });
-            if(subReq.status != 200) {
-                console.error(`Failed to submit ${file} to problem ${options.pid}! Status code: ${subReq.status}`);
+            if (subReq.status != 200) {
+                console.error(`Failed to submit ${file} to problem ${options.pid}! Status code: ${subReq.status} ${subReq.statusText}}`);
                 process.exit(1);
             }
             const res = await subReq.text();
-            if (res.indexOf("题目不可用!!")!= -1) {
+            if (res.indexOf("题目不可用!!") != -1) {
                 console.error(`You don't have permission to submit to problem ${options.pid}!`);
                 process.exit(1);
             }
             console.log(`Submitted ${file} to problem ${options.pid}!`);
+            const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
+                "credentials": "include",
+                "headers": {
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:121.0) Gecko/20100101 Firefox/121.0",
+                    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+                    "Accept-Language": "en-US,en;q=0.5",
+                    "Upgrade-Insecure-Requests": "1",
+                    "Sec-Fetch-Dest": "document",
+                    "Sec-Fetch-Mode": "navigate",
+                    "Sec-Fetch-Site": "same-origin",
+                    "Sec-Fetch-User": "?1",
+                    "Cookie": "PHPSESSID=" + PHPSESSID
+                },
+                "referrer": "https://www.xmoj.tech/status.php",
+                "method": "GET",
+                "mode": "cors"
+            });
+            if (logoutReq.status != 200) {
+                console.error(`Failed to log out! Status code: ${logoutReq.status} ${logoutReq.statusText}}`);
+                process.exit(1);
+            }
+            console.log(`Logged out.`);
         } catch (error) {
             console.error(error);
             process.exit(1);
