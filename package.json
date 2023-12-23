@@ -1,0 +1,17 @@
+{
+  "name": "quicksubmit",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "bun-types": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@types/crypto-js": "^4.2.1",
+    "commander": "^11.1.0",
+    "crypto-js": "^4.2.0"
+  },
+  "version": "1.0.0"
+}
