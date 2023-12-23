@@ -34,7 +34,8 @@ Arguments:
 
 Options:
   -p, --pid <number>  problem id to submit to
+  -c, --cid <number>  contest to submit to (default: "-1")
   -c --config         path to config file
-  -O, --O2 <bool>     whether to enable O2 (default: true)
+  -O, --O2 <boolean>  whether to enable O2 (default: true)
   -h, --help          display help for command
 ```
