@@ -14,14 +14,14 @@ It should look something like this:
 }
 ```
 
-## building
+## Building
 ```bash
 npm install
 npm build
 ```
 The binaries will be in the `bin` folder.
 You can also run it using `npm start`.
-# usage
+## Usage
 ```
 Usage: quicksubmit [options] [file]
 
