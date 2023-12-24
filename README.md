@@ -1,5 +1,6 @@
 # quickSubmit
-<img width="682" alt="image" src="https://github.com/boomzero/quicksubmit/assets/85378277/98b76c00-1ce7-4c37-a05d-6acbcbc1d1c7">
+<img width="674" alt="image" src="https://github.com/boomzero/quicksubmit/assets/85378277/8aaa4e99-60fc-4200-be19-f66b09044102">
+
 
 
 First install bun:
