@@ -15,5 +15,23 @@
     "crypto-js": "^4.2.0",
     "jsdom": "^23.0.1"
   },
-  "version": "1.3.0"
+  "version": "1.3.0",
+  "description": "<img width=\"674\" alt=\"image\" src=\"https://github.com/boomzero/quicksubmit/assets/85378277/8aaa4e99-60fc-4200-be19-f66b09044102\">",
+  "main": "index.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/boomzero/quicksubmit.git"
+  },
+  "keywords": [
+    "xmoj"
+  ],
+  "author": "zhuchenrui",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/boomzero/quicksubmit/issues"
+  },
+  "homepage": "https://github.com/boomzero/quicksubmit#readme"
 }
