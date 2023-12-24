@@ -6,7 +6,7 @@ on:
       - '*'
 jobs:
   build-linux:
-    name: Publish Linux Binaries
+    name: Publish Binaries
     runs-on: ubuntu-latest
 
     steps:
