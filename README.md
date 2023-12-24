@@ -28,13 +28,12 @@ Usage: quicksubmit [options] [file]
 Submit code to XMOJ.
 
 Arguments:
-  file                file to submit (default: "main.cpp")
+  file                File to submit (default: "main.cpp")
 
 Options:
-  -p, --pid <number>  problem id to submit to
-  -c, --cid <number>  contest to submit to (default: "-1")
-  -c --config         path to config file
-  -O, --O2 <boolean>  whether to enable O2 (default: true)
+  -p, --pid <number>  Problem id to submit to. If --cid is set, this can also be the id of the problem in the contest.
+  -c, --cid <number>  Contest to submit to (default: "-1")
+  -c --config         Path to config file
+  -O, --O2 <boolean>  Whether to enable O2 (default: true)
   -h, --help          display help for command
-➜  quickSubmit git:(main) 
 ```
