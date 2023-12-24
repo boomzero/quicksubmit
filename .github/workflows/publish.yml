@@ -11,34 +11,39 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - uses: oven-sh/setup-bun@v1
     - name: Build
       run: |
-        bun install
-        bun build index.ts --compile --outfile=quicksubmit
-    - name: Upload binaries to release
+        npm install
+        npm run build
+    - name: Upload Linux binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: quicksubmit
+        file: bin/index-linux
         asset_name: quicksubmit-linux-amd64
         tag: ${{ github.ref }}
         overwrite: true
-  build-macos:
-    name: Publish macOS binaries
-    runs-on: macos-12
-    steps:
-    - uses: actions/checkout@v2
-    - uses: oven-sh/setup-bun@v1
-    - name: Build
-      run: |
-        bun install
-        bun build index.ts --compile --outfile=quicksubmit
-    - name: Upload binaries to release
+    - name: Upload macOS binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: quicksubmit
-        asset_name: quicksubmit-darwin-amd64
+        file: bin/index-macos
+        asset_name: quicksubmit-macos-amd64
+        tag: ${{ github.ref }}
+        overwrite: true
+    - name: Upload Windows binaries to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: bin/index-win.exe
+        asset_name: quicksubmit-windows-amd64
+        tag: ${{ github.ref }}
+        overwrite: true
+    - name: Upload script to release
+      uses: svenstaro/upload-release-action@v2
+      with:
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
+        file: bin/index.js
+        asset_name: quicksubmit.js
         tag: ${{ github.ref }}
         overwrite: true
