@@ -19,7 +19,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/index-linux
+        file: bin/quicksubmit-linux
         asset_name: quicksubmit-linux-amd64
         tag: ${{ github.ref }}
         overwrite: true
@@ -27,7 +27,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/index-macos
+        file: bin/quicksubmit-macos
         asset_name: quicksubmit-macos-amd64
         tag: ${{ github.ref }}
         overwrite: true
@@ -35,7 +35,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/index-win.exe
+        file: bin/quicksubmit-win.exe
         asset_name: quicksubmit-windows-amd64.exe
         tag: ${{ github.ref }}
         overwrite: true
@@ -43,7 +43,7 @@ jobs:
       uses: svenstaro/upload-release-action@v2
       with:
         repo_token: ${{ secrets.GITHUB_TOKEN }}
-        file: bin/index.js
+        file: bin/quicksubmit.js
         asset_name: quicksubmit.js
         tag: ${{ github.ref }}
         overwrite: true
