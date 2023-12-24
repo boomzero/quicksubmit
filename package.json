@@ -3,10 +3,12 @@
   "module": "index.ts",
   "type": "module",
   "devDependencies": {
+    "@babel/cli": "^7.23.4",
+    "@babel/preset-env": "^7.23.6",
     "bun-types": "latest"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.3.3"
   },
   "dependencies": {
     "@types/crypto-js": "^4.2.1",
@@ -19,7 +21,9 @@
   "description": "<img width=\"674\" alt=\"image\" src=\"https://github.com/boomzero/quicksubmit/assets/85378277/8aaa4e99-60fc-4200-be19-f66b09044102\">",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/index.js",
+    "build": "tsc && babel dist/index.js -o bin/index.js && pkg bin/index.js -t node16-linux,node16-macos,node16-win --out-path bin"
   },
   "repository": {
     "type": "git",

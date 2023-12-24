@@ -1,6 +1,6 @@
 import { Command } from 'commander';
 import { JSDOM } from 'jsdom';
-import MD5 from 'crypto-js/md5';
+import MD5 from 'crypto-js/md5.js';
 import fs from 'fs/promises';
 import os from 'os';
 const program = new Command();
