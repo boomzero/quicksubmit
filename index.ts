@@ -1,6 +1,7 @@
 import { Command } from 'commander';
 import { JSDOM } from 'jsdom';
 import MD5 from 'crypto-js/md5';
+import fs from 'fs/promises';
 import os from 'os';
 const program = new Command();
 
@@ -16,8 +17,9 @@ program
             console.log('Using default config file ~/quicksubmit.json...');
         }
         try {
-            const configFile = Bun.file(options.config);
-            const config = await configFile.json();
+            const configFile = options.config;
+            const configData = await fs.readFile(configFile, 'utf-8');
+            const config = JSON.parse(configData);
             console.log(`Using config file ${options.config}...`);
             if (!config.username || !config.password) {
                 console.error('Please set your username and password in the config file.');
@@ -92,7 +94,6 @@ program
                     console.error(`Failed to get contest page!`);
                     process.exit(1);
                 }
-                console.log();
                 const dom = new JSDOM(res);
                 let contestProblems = [];
                 let rows = (dom.window.document.querySelector("#problemset > tbody") as HTMLTableSectionElement).rows;
@@ -100,14 +101,20 @@ program
                     contestProblems.push(rows[i].children[1].textContent.substring(2, 6).replaceAll("\t", ""));
                 }
                 //console.log(contestProblems);
-                if (contestProblems.indexOf(options.pid) == -1) {
-                    console.error(`Problem ${options.pid} not found in contest ${options.cid}!`);
-                    process.exit(1);
+                if (options.pid.length <= 2) {
+                    CPID = (options.pid.toFixed - 1).toString();
+                    console.log(`Assuming PID: ${CPID} is the id of the problem in contest ${options.cid}`);
+                } else {
+                    if (contestProblems.indexOf(options.pid) == -1) {
+                        console.error(`Problem ${options.pid} not found in contest ${options.cid}!`);
+                        process.exit(1);
+                    }
+                    CPID = contestProblems.indexOf(options.pid).toString();
+                    console.log(`Found problem ${options.pid} in contest ${options.cid}! ID: ${CPID}`);
                 }
-                CPID = contestProblems.indexOf(options.pid).toString();
-                console.log(`Found problem ${options.pid} in contest ${options.cid}! ID: ${CPID}`);
             }
             console.log(`Submitting ${file} to problem ${options.pid} `, (options.cid != '-1' ? `in contest ` + options.cid : ``), `...`);
+            const fileData = await fs.readFile(file, 'utf-8');
             let subReq: Response;
             if (options.cid == '-1') {
                 subReq = await fetch("https://www.xmoj.tech/submit.php", {
@@ -120,7 +127,7 @@ program
                     "method": "POST",
                     "body": "id=" + options.pid + "&" +
                         "language=1&" +
-                        "source=" + encodeURIComponent(await Bun.file(file).text()) +
+                        "source=" + encodeURIComponent(fileData) +
                         (options.O2 == false ? "&enable_O2=on" : "")
                 });
             } else {
@@ -134,7 +141,7 @@ program
                     "method": "POST",
                     "body": "cid=" + options.cid + "&pid=" + CPID + "&" +
                         "language=1&" +
-                        "source=" + encodeURIComponent(await Bun.file(file).text()) +
+                        "source=" + encodeURIComponent(fileData) +
                         (options.O2 == false ? "&enable_O2=on" : "")
                 });
             }
@@ -149,11 +156,11 @@ program
                 process.exit(1);
             }
             let dom = new JSDOM(res);
-            if(dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`)==null){
-                console.error(`Failed to submit ${file} to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``), `!(Submission happened successfully, but the submission result is not available.)`);
+            if (dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`) == null) {
+                console.error(`Failed to submit ${file} to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``) + `!\n(Submission happened successfully, but the submission result is not available.)`);
                 process.exit(1);
             }
-            let rid:string=dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`).innerHTML;
+            let rid: string = dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`).innerHTML;
             console.log(`Submitted ${file} to problem ${options.pid}!`);
             console.log(`Submission ID: ${rid}`);
             const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
