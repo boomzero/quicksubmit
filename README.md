@@ -38,4 +38,5 @@ Options:
   -c --config         path to config file
   -O, --O2 <boolean>  whether to enable O2 (default: true)
   -h, --help          display help for command
+➜  quickSubmit git:(main) 
 ```
