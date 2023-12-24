@@ -6,11 +6,11 @@ import os from 'os';
 const program = new Command();
 
 program
-    .argument('[file]', 'file to submit', 'main.cpp')
-    .requiredOption('-p, --pid <number>', 'problem id to submit to')
-    .option('-c, --cid <number>', 'contest to submit to', '-1')
-    .option('-c --config', 'path to config file', os.homedir() + '/quicksubmit.json')
-    .option('-O, --O2 <boolean>', 'whether to enable O2', true)
+    .argument('[file]', 'File to submit', 'main.cpp')
+    .requiredOption('-p, --pid <number>', 'Problem id to submit to. If --cid is set, this can also be the id of the problem in the contest.')
+    .option('-c, --cid <number>', 'Contest to submit to', '-1')
+    .option('-c --config', 'Path to config file', os.homedir() + '/quicksubmit.json')
+    .option('-O, --O2 <boolean>', 'Whether to enable O2', true)
     .description('Submit code to XMOJ.')
     .action(async (file, options) => {
         if (options.config === 'quicksubmit.json') {
@@ -71,7 +71,7 @@ program
                 process.exit(1);
             }
             console.log(`Logged in as ${config.username}...`);
-            let CPID: string = "";
+            let CPID: string = "", rPID: string = options.pid;
             if (options.cid != '-1') {
                 const contestReq = await fetch("https://www.xmoj.tech/contest.php?cid=" + options.cid, {
                     "credentials": "include",
@@ -102,7 +102,8 @@ program
                 }
                 //console.log(contestProblems);
                 if (options.pid.length <= 2) {
-                    CPID = (options.pid.toFixed - 1).toString();
+                    CPID = (options.pid - 1).toString();
+                    rPID = contestProblems[options.pid - 1];
                     console.log(`Assuming PID: ${CPID} is the id of the problem in contest ${options.cid}`);
                 } else {
                     if (contestProblems.indexOf(options.pid) == -1) {
@@ -145,7 +146,7 @@ program
                         (options.O2 == false ? "&enable_O2=on" : "")
                 });
             }
-            const res = await subReq.text();
+            let res = await subReq.text();
             //console.log(res);
             if (subReq.status != 200) {
                 console.error(`Failed to submit ${file} to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``), `! Status code: ${subReq.status} ${subReq.statusText}`);
@@ -155,13 +156,39 @@ program
                 console.error(`You don't have permission to submit to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``), `!`);
                 process.exit(1);
             }
+            if (res.indexOf("没有这个比赛！") != -1) {
+                console.warn(`Contest ${options.cid} has ended, trying to submit to problem ${rPID} directly...`);
+                const retryReq = await fetch("https://www.xmoj.tech/submit.php", {
+                    "credentials": "include",
+                    "headers": {
+                        "content-type": "application/x-www-form-urlencoded",
+                        "Cookie": "PHPSESSID=" + PHPSESSID
+                    },
+                    "referrer": "https://www.xmoj.tech/submitpage.php?id=" + options.pid,
+                    "method": "POST",
+                    "body": "id=" + rPID + "&" +
+                        "language=1&" +
+                        "source=" + encodeURIComponent(fileData) +
+                        (options.O2 == false ? "&enable_O2=on" : "")
+                });
+                res = await retryReq.text();
+                //console.log(res);
+                if (retryReq.status != 200) {
+                    console.error(`Failed to submit ${file} to problem ${rPID} directly! Status code: ${retryReq.status} ${retryReq.statusText}`);
+                    process.exit(1);
+                }
+                if (res.indexOf("题目不可用!!") != -1) {
+                    console.error(`You don't have permission to submit to problem ${rPID}`, (options.cid != '-1' ? `in contest ` + options.cid : ``) + `!`);
+                    process.exit(1);
+                }
+            }
             let dom = new JSDOM(res);
             if (dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`) == null) {
                 console.error(`Failed to submit ${file} to problem ${options.pid}`, (options.cid != '-1' ? `in contest ` + options.cid : ``) + `!\n(Submission happened successfully, but the submission result is not available.)`);
                 process.exit(1);
             }
             let rid: string = dom.window.document.querySelector(`tr.oddrow:nth-child(1) > td:nth-child(2)`).innerHTML;
-            console.log(`Submitted ${file} to problem ${options.pid}!`);
+            console.log(`Submitted ${file} to problem ${rPID}!`);
             console.log(`Submission ID: ${rid}`);
             const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
                 "credentials": "include",
