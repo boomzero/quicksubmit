@@ -24,7 +24,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/index.js",
-    "build": "tsc && babel dist/index.js -o bin/quicksubmit.js && pkg bin/quicksubmit.js -t node18-linux,node18-macos,node18-win --out-path bin"
+    "build": "tsc && babel dist/index.js -o bin/quicksubmit.js && pkg bin/quicksubmit.js -t node18-linux,node18-macos,node18-win --out-path bin",
+    "pbuild": "tsc && babel dist/index.js -o bin/quicksubmit.js && pkg bin/quicksubmit.js -t node18 --out-path bin"
   },
   "repository": {
     "type": "git",

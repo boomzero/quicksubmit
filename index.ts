@@ -114,7 +114,7 @@ program
                     console.log(`Found problem ${options.pid} in contest ${options.cid}! ID: ${CPID}`);
                 }
             }
-            console.log(`Submitting ${file} to problem ${options.pid} `, (options.cid != '-1' ? `in contest ` + options.cid : ``), `...`);
+            console.log(`Submitting ${file} to problem ${options.pid}` + (options.cid != '-1' ? ` in contest ` + options.cid : ``) + `...`);
             const fileData = await fs.readFile(file, 'utf-8');
             let subReq: Response;
             if (options.cid == '-1') {
