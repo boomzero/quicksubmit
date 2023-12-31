@@ -1,27 +1,34 @@
 # quickSubmit
+
 Submit Code to XMOJ.
 
 <img width="674" alt="image" src="https://github.com/boomzero/quicksubmit/assets/85378277/8aaa4e99-60fc-4200-be19-f66b09044102">
 
 ## quickStart
-You can get binaries from the [release page](https://github.com/boomzero/quicksubmit/releases).
-You need to put `quicksubmit.json` in your home directory.
-It should look something like this:
+
+You can get binaries from the
+[release page](https://github.com/boomzero/quicksubmit/releases). You need to
+put `quicksubmit.json` in your home directory. It should look something like
+this:
+
 ```json
 {
-    "username": "<your username>",
-    "password": "<your password>"
+  "username": "<your username>",
+  "password": "<your password>"
 }
 ```
 
 ## Building
+
 ```bash
 npm install
-npm build
+npm run build
 ```
-The binaries will be in the `bin` folder.
-You can also run it using `npm start`.
+
+The binaries will be in the `bin` folder. You can also run it using `npm start`.
+
 ## Usage
+
 ```
 Usage: quicksubmit [options] [file]
 
