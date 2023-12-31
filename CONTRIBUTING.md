@@ -69,3 +69,19 @@ If you forgot to do this and have not yet pushed your changes to the remote
 repository, you can amend your commit with the sign-off by running
 
     git commit --amend -s
+
+## Submit a Pull Request
+Please submit a pull request with a clear list of what you've done. We can
+always use more test coverage. Please follow our coding conventions (below) and
+make sure all of your commits are atomic (one feature per commit).
+Please submit pull requests to the `next` branch.
+
+## Coding Conventions
+
+Your code should pass `deno fmt` and `deno lint`. You can run them using:
+
+```bash
+deno fmt
+deno lint
+```
+
