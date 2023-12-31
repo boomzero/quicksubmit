@@ -18,8 +18,9 @@ jobs:
         deno-version: v1.x
     - name: Build
       run: |
-        npm install
-        npm run build
+          deno compile -A -c tsconfig.json index.ts -o bin/quicksubmit-linux
+          deno compile -A -c tsconfig.json index.ts -o bin/quicksubmit-win.exe --target x86_64-pc-windows-msvc
+          deno compile -A -c tsconfig.json index.ts -o bin/quicksubmit-macos --target x86_64-apple-darwin
     - name: Upload Linux binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
