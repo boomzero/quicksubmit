@@ -20,9 +20,11 @@ this:
 
 ## Building
 
-This is a [deno](https://deno.com/) project. You should have deno installed. You can install it from
-[here](https://docs.deno.com/runtime/manual/getting_started/installation).
-After that, you can build it using:
+This is a [deno](https://deno.com/) project. You should have deno installed. You
+can install it from
+[here](https://docs.deno.com/runtime/manual/getting_started/installation). After
+that, you can build it using:
+
 ```bash
 deno compile -A -c tsconfig.json index.ts
 ```
