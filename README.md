@@ -20,12 +20,14 @@ this:
 
 ## Building
 
+This is a [deno](https://deno.com/) project. You should have deno installed. You can install it from
+[here](https://docs.deno.com/runtime/manual/getting_started/installation).
+After that, you can build it using:
 ```bash
-npm install
-npm run build
+deno compile -A -c tsconfig.json index.ts
 ```
 
-The binaries will be in the `bin` folder. You can also run it using `npm start`.
+The binaries will be called `quickSubmit(.exe)`.
 
 ## Usage
 
