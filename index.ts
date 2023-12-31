@@ -57,7 +57,7 @@ program
       csrf = csrf.replace('<input type="hidden" name="csrf" value="', "");
       csrf = csrf.replace('" class="1">\n', "");
       console.log(`got CSRF: ${csrf}`);
-      let PHPSESSID: string = Math.random().toString(36).substring(2, 15);
+      const PHPSESSID: string = Math.random().toString(36).substring(2, 15);
       console.log(`using PHPSESSID: ${PHPSESSID}`);
       const loginReq = await fetch("https://www.xmoj.tech/login.php", {
         "credentials": "include",
@@ -88,7 +88,7 @@ program
         process.exit(1);
       }
       console.log(`Logged in as ${config.username}...`);
-      let CPID: string = "", rPID: string = options.pid;
+      let CPID = "", rPID: string = options.pid;
       if (options.cid != "-1") {
         const contestReq = await fetch(
           "https://www.xmoj.tech/contest.php?cid=" + options.cid,
@@ -120,8 +120,8 @@ program
           process.exit(1);
         }
         const dom = new JSDOM(res);
-        let contestProblems = [];
-        let rows = (dom.window.document.querySelector(
+        const contestProblems = [];
+        const rows = (dom.window.document.querySelector(
           "#problemset > tbody",
         ) as HTMLTableSectionElement).rows;
         for (let i = 0; i < rows.length; i++) {
@@ -238,7 +238,7 @@ program
           process.exit(1);
         }
       }
-      let dom = new JSDOM(res);
+      const dom = new JSDOM(res);
       if (
         dom.window.document.querySelector(
           `tr.oddrow:nth-child(1) > td:nth-child(2)`,
@@ -251,7 +251,7 @@ program
         );
         process.exit(1);
       }
-      let rid: string = dom.window.document.querySelector(
+      const rid: string = dom.window.document.querySelector(
         `tr.oddrow:nth-child(1) > td:nth-child(2)`,
       ).innerHTML;
       //let rst:string = dom.window.document.querySelector('tr.oddrow:nth-child(1) > td:nth-child(5) > a:nth-child(1)').innerHTML;
