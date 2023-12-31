@@ -4,9 +4,12 @@ import MD5 from "crypto-js/md5.js";
 import fs from "node:fs/promises";
 import os from "node:os";
 import process from "node:process";
+
 const program = new Command();
 
 program
+  .name("quickSubmit")
+  .version('')
   .argument("[file]", "File to submit", "main.cpp")
   .requiredOption(
     "-p, --pid <number>",
