@@ -275,9 +275,10 @@ program
       const rid: string = dom.window.document.querySelector(
         `tr.oddrow:nth-child(1) > td:nth-child(2)`,
       ).innerHTML;
-      //let rst:string = dom.window.document.querySelector('tr.oddrow:nth-child(1) > td:nth-child(5) > a:nth-child(1)').innerHTML;
+      let rst:string = dom.window.document.querySelector('tr.oddrow:nth-child(1) > td:nth-child(5) > a:nth-child(1)').innerHTML;
       console.log(`Submitted ${file} to problem ${rPID}!`);
       console.log(`Submission ID: ${rid}`);
+      console.log(rst);
       const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
         "credentials": "include",
         "headers": {
