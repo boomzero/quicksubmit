@@ -1,8 +1,8 @@
 {
-    "compilerOptions": {
-        "lib": ["ESNext", "dom"],
-        "strict": false,
-        "jsx": "react-jsx",
-        "allowJs": true
-    }
+  "compilerOptions": {
+    "lib": ["ESNext", "dom"],
+    "strict": false,
+    "jsx": "react-jsx",
+    "allowJs": true
+  }
 }
