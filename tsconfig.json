@@ -1,8 +1,19 @@
 {
   "compilerOptions": {
     "lib": ["ESNext", "dom"],
+    "module": "esnext",
+    "target": "esnext",
+    "moduleResolution": "bundler",
+    "moduleDetection": "force",
+    "noEmit": false,
+    "outDir": "./dist",
+    "composite": true,
     "strict": false,
+    "downlevelIteration": true,
+    "skipLibCheck": true,
     "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
     "allowJs": true
   }
 }
