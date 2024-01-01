@@ -1,5 +1,8 @@
 # quickSubmit
 
+[![Deno](https://github.com/boomzero/quicksubmit/actions/workflows/deno.yml/badge.svg)](https://github.com/boomzero/quicksubmit/actions/workflows/deno.yml)
+[![Publish](https://github.com/boomzero/quicksubmit/actions/workflows/publish.yml/badge.svg)](https://github.com/boomzero/quicksubmit/actions/workflows/publish.yml)
+
 Submit Code to XMOJ.
 
 <img width="674" alt="image" src="https://github.com/boomzero/quicksubmit/assets/85378277/8aaa4e99-60fc-4200-be19-f66b09044102">
