@@ -6,6 +6,7 @@
 Submit Code to XMOJ.
 
 <img width="663" alt="a neat demo" src="https://github.com/boomzero/quicksubmit/assets/85378277/0dd45497-da62-4a6b-bf1a-de7af8077f00">
+<img width="490" alt="image" src="https://github.com/boomzero/quicksubmit/assets/85378277/c2fbe250-2115-429d-b75f-fd87ca39b438">
 
 
 ## quickStart
