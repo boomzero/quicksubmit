@@ -22,6 +22,7 @@ import MD5 from "crypto-js/md5.js";
 import fs from "node:fs/promises";
 import os from "node:os";
 import process from "node:process";
+import * as path from "node:path";
 
 const program = new Command();
 
@@ -29,12 +30,11 @@ program
   .name("quickSubmit")
   .version("v1.4.6")
   .argument("[file]", "File to submit", "main.cpp")
-  .requiredOption(
+  .option(
     "-p, --pid <number>",
-    "Problem id to submit to. If --cid is set, this can also be the id of the problem in the contest.",
+    "Problem id to submit to. If --cid is set, this can also be the id of the problem in the contest. Can be automatically inferred from file path",
   )
   .option("-c, --cid <number>", "Contest to submit to", "-1")
-  .option("-r --fetch-rst", "Whether to fetch the result of the submission")
   .option(
     "-c --config",
     "Path to config file",
@@ -109,6 +109,23 @@ program
         process.exit(1);
       }
       console.log(`Logged in as ${config.username}...`);
+      if (!options.pid) {
+        const cwd = process.cwd();
+        const segments = cwd.split(path.sep);
+        let pid = "";
+        for (let i = segments.length - 1; i >= 0; i--) {
+          if (segments[i].match(/^\d{4}$/)) {
+            pid = segments[i];
+            break;
+          }
+        }
+        if (pid === "") {
+          console.error("Failed to infer PID from file path!");
+          process.exit(1);
+        }
+        console.log(`inferred PID: ${pid}`);
+        options.pid = pid;
+      }
       let CPID = "", rPID: string = options.pid;
       if (options.cid != "-1") {
         const contestReq = await fetch(
