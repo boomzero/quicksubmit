@@ -1,4 +1,7 @@
 {
+  "name": "@boomzero/quicksubmit",
+  "version": "1.5.1",
+  "exports": "./index.ts",
   "compilerOptions": {
     "lib": ["ESNext", "dom"],
     "strict": false,
