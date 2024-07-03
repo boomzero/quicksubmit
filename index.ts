@@ -27,7 +27,7 @@ const program = new Command();
 
 program
   .name("quickSubmit")
-  .version("v1.4.3")
+  .version("v1.4.6")
   .argument("[file]", "File to submit", "main.cpp")
   .requiredOption(
     "-p, --pid <number>",
@@ -191,7 +191,7 @@ program
           "body": "id=" + options.pid + "&" +
             "language=1&" +
             "source=" + encodeURIComponent(fileData) +
-            (options.O2 == false ? "&enable_O2=on" : ""),
+            (options.O2 == true ? "&enable_O2=on" : ""),
         });
       } else {
         subReq = await fetch("https://www.xmoj.tech/submit.php", {
@@ -205,7 +205,7 @@ program
           "body": "cid=" + options.cid + "&pid=" + CPID + "&" +
             "language=1&" +
             "source=" + encodeURIComponent(fileData) +
-            (options.O2 == false ? "&enable_O2=on" : ""),
+            (options.O2 == true ? "&enable_O2=on" : ""),
         });
       }
       let res = await subReq.text();
@@ -241,7 +241,7 @@ program
           "body": "id=" + rPID + "&" +
             "language=1&" +
             "source=" + encodeURIComponent(fileData) +
-            (options.O2 == false ? "&enable_O2=on" : ""),
+            (options.O2 == true ? "&enable_O2=on" : ""),
         });
         res = await retryReq.text();
         //console.log(res);
