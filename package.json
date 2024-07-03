@@ -12,7 +12,7 @@
     "crypto-js": "^4.2.0",
     "jsdom": "^23.0.1"
   },
-  "version": "1.4.4",
+  "version": "1.4.5",
   "description": "Submit code to XMOJ.",
   "main": "index.ts",
   "scripts": {
