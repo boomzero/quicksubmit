@@ -77,9 +77,9 @@ program
       csrf = await csrfReq.text();
       csrf = csrf.replace('<input type="hidden" name="csrf" value="', "");
       csrf = csrf.replace('" class="1">\n', "");
-      console.log(`got CSRF: ${csrf}`);
+      console.log(`Got CSRF: ${csrf}`);
       const PHPSESSID: string = Math.random().toString(36).substring(2, 15);
-      console.log(`using PHPSESSID: ${PHPSESSID}`);
+      console.log(`Using PHPSESSID: ${PHPSESSID}`);
       const loginReq = await fetch("https://www.xmoj.tech/login.php", {
         "credentials": "include",
         "headers": {
@@ -123,7 +123,7 @@ program
           console.error("Failed to infer PID from file path!");
           process.exit(1);
         }
-        console.log(`inferred PID: ${pid}`);
+        console.log(`Inferred PID: ${pid}`);
         options.pid = pid;
       }
       let CPID = "", rPID: string = options.pid;
