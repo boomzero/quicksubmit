@@ -1,3 +1,21 @@
+/*
+ *     quickSubmit
+ *     Copyright (C) 2023-2024  boomzero
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 import { Command } from "commander";
 import { JSDOM } from "jsdom";
 import MD5 from "crypto-js/md5.js";
@@ -257,9 +275,11 @@ program
       const rid: string = dom.window.document.querySelector(
         `tr.oddrow:nth-child(1) > td:nth-child(2)`,
       ).innerHTML;
-      //let rst:string = dom.window.document.querySelector('tr.oddrow:nth-child(1) > td:nth-child(5) > a:nth-child(1)').innerHTML;
       console.log(`Submitted ${file} to problem ${rPID}!`);
       console.log(`Submission ID: ${rid}`);
+      console.log(
+        `Submission URL: \u001b]8;;https://www.xmoj.tech/reinfo.php?sid=${rid}\u001b\\https://www.xmoj.tech/reinfo.php?sid=${rid}\u001b]8;;\u001b\\`,
+      );
       const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
         "credentials": "include",
         "headers": {

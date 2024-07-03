@@ -2259,5 +2259,16 @@
       }
     }
   },
-  "remote": {}
+  "remote": {},
+  "workspace": {
+    "packageJson": {
+      "dependencies": [
+        "npm:@types/crypto-js@^4.2.1",
+        "npm:@types/jsdom@^21.1.6",
+        "npm:commander@^11.1.0",
+        "npm:crypto-js@^4.2.0",
+        "npm:jsdom@^23.0.1"
+      ]
+    }
+  }
 }

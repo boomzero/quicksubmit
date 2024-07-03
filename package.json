@@ -17,8 +17,8 @@
   "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "check": "deno check index.ts -c tsconfig.json",
-    "build": "deno compile -A -c tsconfig.json index.ts"
+    "check": "deno check index.ts",
+    "build": "deno compile -A index.ts"
   },
   "repository": {
     "type": "git",
