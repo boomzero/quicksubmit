@@ -280,6 +280,9 @@ program
       console.log(
         `Submission URL: \u001b]8;;https://www.xmoj.tech/reinfo.php?sid=${rid}\u001b\\https://www.xmoj.tech/reinfo.php?sid=${rid}\u001b]8;;\u001b\\`,
       );
+      console.log(
+        `Submission Status: \u001b]8;;https://www.xmoj.tech/status.php\u001b\\https://www.xmoj.tech/status.php\u001b]8;;\u001b\\`,
+      );
       const logoutReq = await fetch("https://www.xmoj.tech/logout.php", {
         "credentials": "include",
         "headers": {
