@@ -39,7 +39,7 @@ Update: It turns out `bun` fixed the issue that caused me to switch to `deno`, a
 Compile using `bun`:
 
 ```bash
-    bun build ./index.ts --compile
+bun build --compile --outfile qsm ./index.ts
 ```
 
 ## Usage
