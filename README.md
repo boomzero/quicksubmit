@@ -35,6 +35,13 @@ deno compile -A -c tsconfig.json index.ts
 
 The binaries will be called `quickSubmit(.exe)`.
 
+Update: It turns out `bun` fixed the issue that caused me to switch to `deno`, and `bun` works now.
+Compile using `bun`:
+
+```bash
+    bun build ./index.ts --compile
+```
+
 ## Usage
 
 ```
