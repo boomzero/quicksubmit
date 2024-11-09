@@ -23,8 +23,8 @@ jobs:
         with:
           deno-version: v2.x
       - name: Run linter
-        run: deno lint
+        run: deno install&&deno lint
 
       - name: Run tests
-        run: deno compile -A index.ts
+        run: deno install&&deno compile -A index.ts
 
