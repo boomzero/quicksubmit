@@ -24,7 +24,6 @@ jobs:
           deno install
           deno publish
           deno compile -A -o bin/quicksubmit-linux index.ts
-          deno compile -A -o bin/quicksubmit-win.exe --target x86_64-pc-windows-msvc index.ts
           deno compile -A -o bin/quicksubmit-macos --target x86_64-apple-darwin index.ts
     - name: Upload Linux binaries to release
       uses: svenstaro/upload-release-action@v2
@@ -42,6 +41,23 @@ jobs:
         asset_name: quicksubmit-macos-amd64
         tag: ${{ github.ref }}
         overwrite: true
+  build-win:
+    permissions:
+      contents: write  # This is required for actions/checkout
+    name: Build Windows Binaries
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Setup Deno
+    # uses: denoland/setup-deno@v1
+      uses: denoland/setup-deno@61fe2df320078202e33d7d5ad347e7dcfa0e8f31  # v1.1.2
+      with:
+        deno-version: v2.x
+    - name: Build
+      run: |
+          deno install
+          deno compile -A -o bin/quicksubmit-win.exe --target x86_64-pc-windows-msvc index.ts
     - name: Upload Windows binaries to release
       uses: svenstaro/upload-release-action@v2
       with:
