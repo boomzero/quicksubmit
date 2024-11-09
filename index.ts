@@ -36,9 +36,9 @@ program
   )
   .option("-c, --cid <number>", "Contest to submit to", "-1")
   .option(
-    "-c --config",
+    "-C, --config",
     "Path to config file",
-    os.homedir() + "/quicksubmit.json",
+    os.homedir() + path.sep +"quicksubmit.json",
   )
   .option("-O, --O2 <boolean>", "Whether to enable O2", true)
   .description("Submit code to XMOJ.")
