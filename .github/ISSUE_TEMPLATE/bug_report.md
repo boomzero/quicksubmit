@@ -4,7 +4,6 @@ about: Create a report to help us improve
 title: "[Bug] "
 labels: bug
 assignees: boomzero
-
 ---
 
 **Describe the bug** A clear and concise description of what the bug is.
@@ -15,7 +14,7 @@ options `...`
 **Expected behavior** A clear and concise description of what you expected to
 happen.
 
-**onsole Output** The output of `quickSubmit`
+**Console Output** The output of `quickSubmit`.
 
 **Desktop (please complete the following information):**
 
